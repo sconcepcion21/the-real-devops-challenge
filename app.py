@@ -1,9 +1,8 @@
 from os import environ
-
+from flask import Flask, jsonify, abort
+from flask_pymongo import PyMongo
 from bson import json_util
 from bson.objectid import ObjectId
-from flask import Flask, jsonify
-from flask_pymongo import PyMongo
 
 from src.mongoflask  import MongoJSONEncoder, ObjectIdConverter, find_restaurants
 
@@ -22,11 +21,11 @@ def restaurants():
 
 @app.route("/api/v1/restaurant/<id>")
 def restaurant(id):
-    restaurant = find_restaurants(mongo, id)
-    if restaurant:
-        return jsonify(restaurant)
-    else:
-        return '', 204
+    restaurant = mongo.db.restaurant.find_one({"_id": ObjectId(id)})
+    if restaurant is None:
+        abort(204)
+
+    return jsonify(restaurant)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False, port=8080)
