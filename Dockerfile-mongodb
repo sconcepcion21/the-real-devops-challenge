@@ -1,0 +1,8 @@
+# Utilizamos la imagen oficial de MongoDB como base
+FROM mongo:6.0.5
+
+# Copiamos el archivo de datos de restaurantes al directorio de importación automática de MongoDB
+COPY data/restaurant.json /restaurant.json
+
+# Copiamos el script de importación al directorio de inicio de la base de datos
+COPY data/import.sh /docker-entrypoint-initdb.d/import.sh
