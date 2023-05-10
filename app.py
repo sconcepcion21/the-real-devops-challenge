@@ -26,5 +26,6 @@ def restaurant(id):
         abort(204)
     return jsonify(restaurant)
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=False, port=8080)
