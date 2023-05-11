@@ -1,0 +1,21 @@
+# Utilizar una imagen base liviana de Python
+FROM python:3.10-slim
+
+# Establecer el directorio de trabajo en el contenedor
+WORKDIR /app
+
+# Copiar los archivos de la aplicación al contenedor
+COPY app.py /app/app.py
+COPY src /app/src
+COPY requirements.txt /app/requirements.txt
+
+# Instalar las dependencias de Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Establecer la variable de entorno MONGO_URI ENV MONGO_URI="mongodb://localhost:27017/test"
+
+# Exponer el puerto en el que la aplicación escucha
+EXPOSE 8080
+
+# Establecer el comando para ejecutar la aplicación
+CMD [ "python", "app.py" ]
