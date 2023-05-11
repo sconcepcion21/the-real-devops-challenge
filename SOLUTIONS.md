@@ -118,3 +118,37 @@ environment: Defines the environment variables to be used in the application con
 volumes: Defines the volumes to be used in the services.
 
 dbdata: Defines the "dbdata" volume to be used for persistent storage of MongoDB data.
+
+####
+
+Final Challenge. Deploy it on kubernetes
+
+If you are a container hero, an excellent devops... We want to see your expertise. Use a kubernetes system to deploy the API. We recommend you to use tools like minikube or microk8s.
+
+Write the deployment file (yaml file) used to deploy your API (python app and mongodb).
+
+------
+
+apiVersion and kind specify the Kubernetes API version and the object type (Deployment in this case).
+metadata contains metadata like the deployment name.
+spec describes the characteristics of the deployment.
+replicas: 1 indicates that one replica of the pod should be created.
+selector defines how pods will be selected based on labels. In this case, pods are selected based on the label app: my-app.
+template defines the template for pods created by this deployment.
+metadata under template contains labels for the created pods.
+spec under template describes the characteristics of the created pods.
+containers specifies the containers to run in the pods.
+name defines the container name.
+image specifies the container image.
+ports defines the ports to expose within the container.
+volumeMounts specifies the mount points for the container.
+volumes defines the volumes available for the pods.
+In summary, this YAML file defines a Deployment that creates a pod with two containers: one with the MongoDB image and another with the Python image. The MongoDB container exposes port 27017 and uses a volume named "dbdata" to store the database data. The Python container exposes port 8080 and uses the environment variable "MONGO_URI" to establish a connection to the MongoDB database.
+
+------
+
+Conclusion
+
+I was unable to complete this final challenge as I haven't worked with Kubernetes before and don't have enough experience to solve it. I was only able to bring up one of the desired containers. However, I enjoyed the challenge and it provided me with an opportunity to learn and further explore tools like Docker, which I had some prior experience with but not at this level.
+
+Thank you very much.

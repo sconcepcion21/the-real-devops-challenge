@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:6.0.5
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: dbdata
+              mountPath: /data/db
+        - name: my-app
+          image: python:3.10-slim
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/test
+      volumes:
+        - name: dbdata
+          emptyDir: {}
+
