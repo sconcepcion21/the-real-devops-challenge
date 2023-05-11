@@ -84,3 +84,37 @@ Challenge 5. Docker Compose it
 Once you've got dockerized all the API components (python app and database), you are ready to make a docker-compose file. KISS.
 
 ------
+
+version: '3': Specifies the version of the Docker Compose syntax being used.
+
+services: Defines the services that make up the application.
+
+mongodb: Defines the MongoDB service.
+
+build: Specifies how to build the MongoDB container image.
+
+context: .: Indicates that the build context is the current directory where the docker-compose.yml file is located.
+
+dockerfile: Dockerfile-mongodb: Specifies the name of the Dockerfile to use for building the MongoDB container image.
+
+ports: Maps the host ports to the container. In this case, port 27017 of the host is mapped to port 27017 of the container, allowing access to the MongoDB instance from the host.
+
+volumes: Defines the volumes to be used in the MongoDB container. In this case, a volume named "dbdata" is created and mounted to the "/data/db" directory in the container. This allows for persistent storage of MongoDB data even if the container is stopped or removed.
+
+app: Defines the application service.
+
+build: Specifies how to build the application container image.
+
+context: .: Indicates that the build context is the current directory.
+
+dockerfile: Dockerfile-app: Specifies the name of the Dockerfile to use for building the application container image.
+
+ports: Maps the host ports to the container. In this case, port 8080 of the host is mapped to port 8080 of the container, allowing access to the application from the host.
+
+depends_on: Indicates that this service depends on the MongoDB service. Docker Compose ensures that the MongoDB service is started before this service.
+
+environment: Defines the environment variables to be used in the application container. In this case, the "MONGO_URI" environment variable is set to "mongodb://mongodb:27017/test", which is the connection URL to the MongoDB instance.
+
+volumes: Defines the volumes to be used in the services.
+
+dbdata: Defines the "dbdata" volume to be used for persistent storage of MongoDB data.

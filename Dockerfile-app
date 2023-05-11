@@ -12,8 +12,6 @@ COPY requirements.txt /app/requirements.txt
 # Instalar las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Establecer la variable de entorno MONGO_URI ENV MONGO_URI="mongodb://localhost:27017/test"
-
 # Exponer el puerto en el que la aplicación escucha
 EXPOSE 8080
 
